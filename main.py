@@ -4,11 +4,20 @@
 Writes the entry text to /output/entry.txt, the one text the
 competition's judge compares. Standard library only, no network,
 deterministic: every run writes the same bytes.
+
+The entry must be between 1 and 140 characters, so main() checks
+the length before writing anything; a bad length fails loudly
+instead of producing an invalid submission. The output path is
+/output/entry.txt when that directory exists (the competition
+sandbox), and falls back to output/ next to this file for local
+runs, so the same bytes land in the same file either way.
 """
 
 import os
 from pathlib import Path
 
+# "elevawkward" blends elevator + awkward: the word itself is the
+# joke, naming the stiff silence of a shared lift in one breath.
 ENTRY = (
     "elevawkward (n.) \u2014 the stiff, eyes-on-the-floor silence "
     "of sharing a lift with a stranger."
